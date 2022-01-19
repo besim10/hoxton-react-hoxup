@@ -37,11 +37,11 @@ function NewUser({ setModal, users, setUsers }) {
         <h2>Enter your details</h2>
         <form onSubmit={handleSubmit} className="new-user">
           <label htmlFor="firstName">First name</label>
-          <input name="firstName" id="firstName" type="text" />
+          <input name="firstName" id="firstName" type="text" required />
           <label htmlFor="lastName">Last name</label>
-          <input name="lastName" id="lastName" type="text" />
+          <input name="lastName" id="lastName" type="text" required />
           <label htmlFor="phoneNumber">Phone Number</label>
-          <input name="phoneNumber" id="phoneNumber" type="text" />
+          <input name="phoneNumber" id="phoneNumber" type="text" required />
           <button type="submit">CREATE USER</button>
         </form>
       </div>

@@ -6,6 +6,7 @@ import Main from "./pages/Main";
 
 function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(null);
+  const [selectedUsersToTalk, setSelectedUsersToTalk] = useState([]);
   const [modal, setModal] = useState("");
   const [users, setUsers] = useState([]);
 
@@ -14,7 +15,7 @@ function App() {
       .then((resp) => resp.json())
       .then((usersFromServer) => setUsers(usersFromServer));
   }, []);
-  console.log(users);
+
   return (
     <div className="app">
       <Routes>
@@ -31,7 +32,13 @@ function App() {
         />
         <Route
           path="/logged-in"
-          element={<Main userLoggedIn={userLoggedIn} />}
+          element={
+            <Main
+              userLoggedIn={userLoggedIn}
+              setModal={setModal}
+              selectedUsersToTalk={selectedUsersToTalk}
+            />
+          }
         />
       </Routes>
       <Modals
@@ -39,6 +46,8 @@ function App() {
         setModal={setModal}
         users={users}
         setUsers={setUsers}
+        userLoggedIn={userLoggedIn}
+        setSelectedUsersToTalk={setSelectedUsersToTalk}
       />
     </div>
   );
