@@ -152,13 +152,7 @@ function Main({ userLoggedIn }) {
         {/* <!-- Message Box --> */}
         <footer>
           <form className="panel conversation__message-box">
-            <input
-              type="text"
-              placeholder="Type a message"
-              // @ts-ignore
-              rows={1}
-              value=""
-            />
+            <input type="text" placeholder="Type a message" value="" />
             <button type="submit">
               {/* <!-- This is the send button --> */}
               <svg

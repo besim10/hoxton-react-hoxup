@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import LoginUsersList from "../components/LoginUsersList";
+import LoginUserItem from "../components/LoginUserItem";
 
-function Login({ setUserLoggedIn }) {
+function Login({ setUserLoggedIn, setModal }) {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ function Login({ setUserLoggedIn }) {
         <h2>Choose your user!</h2>
         <ul>
           {users.map((user) => (
-            <LoginUsersList
+            <LoginUserItem
               setUserLoggedIn={setUserLoggedIn}
               key={user.id}
               user={user}
@@ -23,7 +23,13 @@ function Login({ setUserLoggedIn }) {
           ))}
           <li>
             <button className="user-selection">
-              <h3>+ Add a new user</h3>
+              <h3
+                onClick={() => {
+                  setModal("new-user");
+                }}
+              >
+                + Add a new user
+              </h3>
             </button>
           </li>
         </ul>

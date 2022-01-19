@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-function LoginUsersList({ user, setUserLoggedIn }) {
+function LoginUserItem({ user, setUserLoggedIn }) {
   const navigate = useNavigate();
   const getUserLoggedIn = () => {
     fetch(`http://localhost:4000/users/${user.id}`)
@@ -28,4 +28,4 @@ function LoginUsersList({ user, setUserLoggedIn }) {
     </li>
   );
 }
-export default LoginUsersList;
+export default LoginUserItem;
