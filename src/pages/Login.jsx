@@ -1,14 +1,6 @@
-import { useEffect, useState } from "react";
 import LoginUserItem from "../components/LoginUserItem";
 
-function Login({ setUserLoggedIn, setModal }) {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:4000/users/")
-      .then((resp) => resp.json())
-      .then((usersFromServer) => setUsers(usersFromServer));
-  }, []);
+function Login({ users, setUserLoggedIn, setModal }) {
   return (
     <div className="main-wrapper login">
       <section className="login-section">

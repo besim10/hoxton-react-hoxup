@@ -26,6 +26,27 @@
             "phoneNumber": "+696969696969",
             "avatar": "https://avatars.dicebear.com/api/avataaars/NicolasMarcora.svg",
             "id": 4
+        },
+        {
+            "firstName": "Albulena",
+            "lastName": "Kafexhiu",
+            "phoneNumber": "+38349255255",
+            "avatar": "https://avatars.dicebear.com/api/avataaars/AlbulenaKafexhiu.svg",
+            "id": 5
+        },
+        {
+            "firstName": "Besim",
+            "lastName": "Sokoli",
+            "phoneNumber": "+38349206105",
+            "avatar": "https://avatars.dicebear.com/api/avataaars/BesimSokoli.svg",
+            "id": 6
+        },
+        {
+            "firstName": "Egon",
+            "lastName": "Loli",
+            "phoneNumber": "",
+            "avatar": "https://avatars.dicebear.com/api/avataaars/EgonLoli.svg",
+            "id": 9
         }
     ],
     "messages": [{
