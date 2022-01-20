@@ -5,17 +5,12 @@ function LoginUserItem({ user, setUserLoggedIn }) {
   const getUserLoggedIn = () => {
     fetch(`http://localhost:4000/users/${user.id}`)
       .then((resp) => resp.json())
-      .then((userFromServer) => setUserLoggedIn(userFromServer));
+      .then((userFromServer) => setUserLoggedIn(userFromServer))
+      .then(() => navigate("/logged-in"));
   };
   return (
     <li>
-      <button
-        onClick={() => {
-          getUserLoggedIn();
-          navigate("/logged-in");
-        }}
-        className="user-selection"
-      >
+      <button onClick={getUserLoggedIn} className="user-selection">
         <img
           className="avatar"
           width="50"

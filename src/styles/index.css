@@ -73,7 +73,7 @@ textarea:focus {
 .main-wrapper {
     display: grid;
     position: relative;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: auto 2fr;
     height: 100vh;
     max-width: 1440px;
     margin: 0 auto;
@@ -153,9 +153,10 @@ textarea:focus {
 .modal {
     background-color: white;
     color: black;
-    padding: 1rem;
+    padding: 1.5rem;
     display: grid;
     position: relative;
+    border-radius: 5px;
     place-items: center;
 }
 
@@ -191,6 +192,10 @@ textarea:focus {
     height: 35px;
     display: grid;
     place-content: center;
+}
+
+.delete-account {
+    color: rgb(240, 64, 64);
 }
 
 .aside__search-container {

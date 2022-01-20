@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Modals from "./components/Modals/Modals";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(null);
@@ -37,9 +38,22 @@ function App() {
               userLoggedIn={userLoggedIn}
               setModal={setModal}
               selectedUsersToTalk={selectedUsersToTalk}
+              users={users}
             />
           }
         />
+        <Route
+          path="/logged-in/:conversationId"
+          element={
+            <Main
+              userLoggedIn={userLoggedIn}
+              setModal={setModal}
+              selectedUsersToTalk={selectedUsersToTalk}
+              users={users}
+            />
+          }
+        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Modals
         modal={modal}
@@ -47,6 +61,7 @@ function App() {
         users={users}
         setUsers={setUsers}
         userLoggedIn={userLoggedIn}
+        setUserLoggedIn={setUserLoggedIn}
         setSelectedUsersToTalk={setSelectedUsersToTalk}
       />
     </div>

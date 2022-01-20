@@ -22,9 +22,6 @@ function NewChat({ setModal, userLoggedIn, setSelectedUsersToTalk }) {
       body: JSON.stringify(conversation),
     })
       .then((resp) => resp.json())
-      .then((conversationFromServer) =>
-        setSelectedUsersToTalk.push(conversationFromServer)
-      )
       .then(setModal(""));
   };
   return (
