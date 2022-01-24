@@ -28,17 +28,17 @@
             "id": 4
         },
         {
-            "firstName": "Besim",
-            "lastName": "Sokoli",
-            "phoneNumber": "+38349206105",
-            "avatar": "https://avatars.dicebear.com/api/avataaars/BesimSokoli.svg",
+            "firstName": "Rinor",
+            "lastName": "Rama",
+            "phoneNumber": "+696969696969",
+            "avatar": "https://avatars.dicebear.com/api/avataaars/RinorRama.svg",
             "id": 5
         },
         {
-            "firstName": "Albulena",
-            "lastName": "Kafexhiu",
-            "phoneNumber": "+3834554554",
-            "avatar": "https://avatars.dicebear.com/api/avataaars/AlbulenaKafexhiu.svg",
+            "firstName": "Artiola",
+            "lastName": "Caka",
+            "phoneNumber": "+696969696969",
+            "avatar": "https://avatars.dicebear.com/api/avataaars/ArtiolaCaka.svg",
             "id": 6
         }
     ],
@@ -79,22 +79,76 @@
             "id": 6
         },
         {
-            "userId": 6,
-            "messageText": "Hej Besim!",
+            "userId": 1,
+            "messageText": "Hello Nico!",
             "conversationId": 4,
             "id": 7
         },
         {
-            "userId": 5,
-            "messageText": "Urno Alb!",
-            "conversationId": 4,
+            "userId": 2,
+            "messageText": "Hey Luca, I'm Geri!",
+            "conversationId": 2,
             "id": 8
         },
         {
-            "userId": 6,
-            "messageText": "Qka po bon!",
-            "conversationId": 4,
+            "userId": 3,
+            "messageText": "Hey Geri, what's up?",
+            "conversationId": 2,
             "id": 9
+        },
+        {
+            "userId": 1,
+            "messageText": "kamsdklmaskldm",
+            "conversationId": 1,
+            "id": 10
+        },
+        {
+            "userId": 1,
+            "messageText": "Hello!!!!!!!!!!",
+            "conversationId": 1,
+            "id": 11
+        },
+        {
+            "userId": 1,
+            "messageText": "How are you oday?",
+            "conversationId": 1,
+            "id": 12
+        },
+        {
+            "userId": 1,
+            "messageText": "🧠",
+            "conversationId": 1,
+            "id": 15
+        },
+        {
+            "userId": 2,
+            "messageText": "🤯",
+            "conversationId": 1,
+            "id": 16
+        },
+        {
+            "userId": 2,
+            "messageText": "😄",
+            "conversationId": 1,
+            "id": 20
+        },
+        {
+            "userId": 6,
+            "messageText": "Hello!!!",
+            "conversationId": 13,
+            "id": 21
+        },
+        {
+            "userId": 1,
+            "messageText": "How are you Artiola?",
+            "conversationId": 13,
+            "id": 22
+        },
+        {
+            "userId": 6,
+            "messageText": "All good and you?",
+            "conversationId": 13,
+            "id": 23
         }
     ],
     "conversations": [{
@@ -113,9 +167,54 @@
             "id": 3
         },
         {
+            "userId": 1,
+            "participantId": 4,
+            "id": 4
+        },
+        {
+            "userId": 4,
+            "participantId": 2,
+            "id": 5
+        },
+        {
+            "userId": 4,
+            "participantId": 3,
+            "id": 6
+        },
+        {
+            "userId": 5,
+            "participantId": 1,
+            "id": 7
+        },
+        {
+            "userId": 5,
+            "participantId": 4,
+            "id": 8
+        },
+        {
+            "userId": 5,
+            "participantId": 2,
+            "id": 9
+        },
+        {
+            "userId": 5,
+            "participantId": 3,
+            "id": 10
+        },
+        {
+            "userId": 6,
+            "participantId": 4,
+            "id": 11
+        },
+        {
             "userId": 6,
             "participantId": 5,
-            "id": 4
+            "id": 12
+        },
+        {
+            "userId": 6,
+            "participantId": 1,
+            "id": 13
         }
     ]
 }

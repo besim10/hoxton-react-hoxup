@@ -7,12 +7,11 @@ import NotFound from "./pages/NotFound";
 
 function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(null);
-  const [selectedUsersToTalk, setSelectedUsersToTalk] = useState([]);
   const [modal, setModal] = useState("");
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/users/")
+    fetch("http://localhost:4000/users")
       .then((resp) => resp.json())
       .then((usersFromServer) => setUsers(usersFromServer));
   }, []);
@@ -37,7 +36,6 @@ function App() {
             <Main
               userLoggedIn={userLoggedIn}
               setModal={setModal}
-              selectedUsersToTalk={selectedUsersToTalk}
               users={users}
             />
           }
@@ -48,7 +46,6 @@ function App() {
             <Main
               userLoggedIn={userLoggedIn}
               setModal={setModal}
-              selectedUsersToTalk={selectedUsersToTalk}
               users={users}
             />
           }
@@ -62,7 +59,6 @@ function App() {
         setUsers={setUsers}
         userLoggedIn={userLoggedIn}
         setUserLoggedIn={setUserLoggedIn}
-        setSelectedUsersToTalk={setSelectedUsersToTalk}
       />
     </div>
   );

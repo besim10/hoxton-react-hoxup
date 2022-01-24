@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react/cjs/react.development";
 
-function NewChat({ setModal, userLoggedIn, setSelectedUsersToTalk }) {
+function NewChat({ setModal, userLoggedIn }) {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     fetch("http://localhost:4000/users")
@@ -33,7 +33,7 @@ function NewChat({ setModal, userLoggedIn, setSelectedUsersToTalk }) {
         <h2>Pick a user to talk to</h2>
         <ul>
           {usersToShow().map((user) => (
-            <li>
+            <li key={user.id}>
               <button
                 onClick={() => {
                   addConversationToServer({

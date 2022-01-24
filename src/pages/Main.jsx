@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-function Main({ userLoggedIn, setModal, users, selectedUsersToTalk }) {
+function Main({ userLoggedIn, setModal, users }) {
   const [currentConversation, setCurrentConversation] = useState(null);
   const [conversations, setConversations] = useState([]);
-
   const params = useParams();
   const navigate = useNavigate();
 
@@ -12,7 +11,15 @@ function Main({ userLoggedIn, setModal, users, selectedUsersToTalk }) {
     if (userLoggedIn === null) navigate("/");
   }, [userLoggedIn, navigate]);
   useEffect(() => {
+    if (userLoggedIn === null) return;
+
+    fetch(`http://localhost:4000/conversations?userId=${userLoggedIn.id}`)
+      .then((resp) => resp.json())
+      .then((conversations) => setConversations(conversations));
+  }, [userLoggedIn]);
+  useEffect(() => {
     if (params.conversationId) {
+      console.log("Fetching...");
       fetch(
         `http://localhost:4000/conversations/${params.conversationId}?_embed=messages`
       )
@@ -20,29 +27,9 @@ function Main({ userLoggedIn, setModal, users, selectedUsersToTalk }) {
         .then((conversation) => setCurrentConversation(conversation));
     }
   }, [params.conversationId]);
-  useEffect(() => {
-    if (userLoggedIn === null) return;
 
-    fetch(`http://localhost:4000/conversations?userId=${userLoggedIn.id}`)
-      .then((resp) => resp.json())
-      .then((conversations) => setConversations(conversations));
-  }, [userLoggedIn]);
-  function getOutGoingMessages() {
-    let outGoingMessages = [];
-    outGoingMessages = currentConversation.messages.filter(
-      (message) => message.userId === currentConversation.userId
-    );
-    return outGoingMessages;
-  }
-  function getRecivedMessages() {
-    let recivedMessages = [];
-    recivedMessages = currentConversation.messages.filter(
-      (message) => message.userId !== currentConversation.userId
-    );
-    return recivedMessages;
-  }
   if (userLoggedIn === null) return <h1>User not signed in...</h1>;
-  console.log(currentConversation);
+
   return (
     <div className="main-wrapper">
       {/* <!-- Side Panel --> */}
@@ -71,7 +58,6 @@ function Main({ userLoggedIn, setModal, users, selectedUsersToTalk }) {
             type="search"
             name="messagesSearch"
             placeholder="Search chats"
-            value=""
           />
         </form>
 
@@ -129,24 +115,21 @@ function Main({ userLoggedIn, setModal, users, selectedUsersToTalk }) {
         </ul>
       </aside>
 
-      {/* <!-- Main Chat Section --> */}
       {params.conversationId && currentConversation !== null ? (
         <main className="conversation">
           {/* <!-- Chat header --> */}
           <header className="panel"></header>
 
           <ul className="conversation__messages">
-            {getOutGoingMessages().map((currentConversation) => {
+            {currentConversation.messages.map((message) => {
               return (
-                <li key={currentConversation.id} className="outgoing">
-                  <p>{currentConversation.messageText}</p>
-                </li>
-              );
-            })}
-            {getRecivedMessages().map((currentConversation) => {
-              return (
-                <li key={currentConversation.id}>
-                  <p>{currentConversation.messageText}</p>
+                <li
+                  key={message.id}
+                  className={
+                    message.userId === userLoggedIn.id ? "outgoing" : "incoming"
+                  }
+                >
+                  <p>{message.messageText}</p>
                 </li>
               );
             })}
@@ -155,7 +138,7 @@ function Main({ userLoggedIn, setModal, users, selectedUsersToTalk }) {
           {/* <!-- Message Box --> */}
           <footer>
             <form className="panel conversation__message-box">
-              <input type="text" placeholder="Type a message" value="" />
+              <input type="text" placeholder="Type a message" />
               <button type="submit">
                 {/* <!-- This is the send button --> */}
                 <svg

@@ -8,19 +8,12 @@ function Modals({
   setUsers,
   userLoggedIn,
   setUserLoggedIn,
-  setSelectedUsersToTalk,
 }) {
   switch (modal) {
     case "new-user":
       return <NewUser users={users} setUsers={setUsers} setModal={setModal} />;
     case "new-chat":
-      return (
-        <NewChat
-          setModal={setModal}
-          userLoggedIn={userLoggedIn}
-          setSelectedUsersToTalk={setSelectedUsersToTalk}
-        />
-      );
+      return <NewChat setModal={setModal} userLoggedIn={userLoggedIn} />;
     case "settings":
       return (
         <Settings
