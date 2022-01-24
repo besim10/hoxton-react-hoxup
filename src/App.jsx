@@ -35,6 +35,7 @@ function App() {
           element={
             <Main
               userLoggedIn={userLoggedIn}
+              modal={modal}
               setModal={setModal}
               users={users}
             />
@@ -45,6 +46,7 @@ function App() {
           element={
             <Main
               userLoggedIn={userLoggedIn}
+              modal={modal}
               setModal={setModal}
               users={users}
             />

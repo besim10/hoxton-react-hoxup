@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-function Main({ userLoggedIn, setModal, users }) {
+function Main({ userLoggedIn, modal, setModal, users }) {
   const [currentConversation, setCurrentConversation] = useState(null);
   const [conversations, setConversations] = useState([]);
   const params = useParams();
@@ -28,6 +28,65 @@ function Main({ userLoggedIn, setModal, users }) {
     }
   }, [params.conversationId]);
 
+  const usersIHaveNotTalkedToYet = users.filter((user) => {
+    // when do I want to keep this user?
+
+    // don't show the currently logged in user
+    if (userLoggedIn && user.id === userLoggedIn.id) return false;
+
+    // don't show any users in conversations
+    // Is this user's id in the conversations?
+    // Is it either in userId or participantId
+    for (const conversation of conversations) {
+      if (conversation.userId === user.id) return false;
+      if (conversation.participantId === user.id) return false;
+    }
+    // at this point we know this user's id is not anywhere in the conversations
+    // so we want to keep it
+    return true;
+  });
+  function createConversation(participantId) {
+    fetch("http://localhost:4000/conversations", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userLoggedIn.id,
+        participantId: participantId,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((newConversation) => {
+        setConversations([...conversations, newConversation]);
+        setModal("");
+      });
+  }
+  function createMessage(text) {
+    // create a message on the server ✅
+
+    fetch("http://localhost:4000/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userLoggedIn.id,
+        messageText: text,
+        conversationId: Number(params.conversationId),
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((newMessage) => {
+        const currentConversationCopy = JSON.parse(
+          JSON.stringify(currentConversation)
+        );
+        currentConversationCopy.messages.push(newMessage);
+        setCurrentConversation(currentConversationCopy);
+      });
+
+    // update the conversation state
+  }
   if (userLoggedIn === null) return <h1>User not signed in...</h1>;
 
   return (
@@ -137,8 +196,21 @@ function Main({ userLoggedIn, setModal, users }) {
 
           {/* <!-- Message Box --> */}
           <footer>
-            <form className="panel conversation__message-box">
-              <input type="text" placeholder="Type a message" />
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                createMessage(e.target.text.value);
+                e.target.reset();
+              }}
+              className="panel conversation__message-box"
+            >
+              <input
+                type="text"
+                placeholder="Type a message"
+                required
+                autoComplete="off"
+                name="text"
+              />
               <button type="submit">
                 {/* <!-- This is the send button --> */}
                 <svg
@@ -156,6 +228,41 @@ function Main({ userLoggedIn, setModal, users }) {
             </form>
           </footer>
         </main>
+      ) : null}
+      {modal === "new-chat" ? (
+        <div className="modal-wrapper" onClick={() => setModal("")}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setModal("")} className="close-modal">
+              X
+            </button>
+            <h2>Pick a user to talk to</h2>
+            {usersIHaveNotTalkedToYet.length > 0 ? (
+              <ul>
+                {usersIHaveNotTalkedToYet.map((user) => (
+                  <li key={user.id}>
+                    <button
+                      onClick={() => {
+                        createConversation(user.id);
+                      }}
+                      className="user-selection"
+                    >
+                      <img
+                        className="avatar"
+                        width="50"
+                        height="50"
+                        src={user.avatar}
+                        alt="avatar"
+                      />
+                      <h3>{`${user.firstName} ${user.lastName}`}</h3>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No new person to talk to</p>
+            )}
+          </div>
+        </div>
       ) : null}
     </div>
   );
